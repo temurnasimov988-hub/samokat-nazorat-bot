@@ -1,3 +1,0 @@
-aiogram
-gspread
-oauth2client
