@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Samokat Nazorat Web App</title>
+    <!-- Telegram Web App Script -->
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    <style>
+        :root {
+            --tg-theme-bg-color: #ffffff;
+            --tg-theme-text-color: #000000;
+            --tg-theme-button-color: #2481cc;
+            --tg-theme-button-text-color: #ffffff;
+            --tg-theme-hint-color: #999999;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--tg-theme-bg-color, #f4f4f9);
+            color: var(--tg-theme-text-color, #333333);
+            margin: 0;
+            padding: 16px;
+            box-sizing: border-box;
+        }
+
+        h3 {
+            text-align: center;
+            margin-top: 0;
+            color: var(--tg-theme-button-color, #2481cc);
+        }
+
+        .form-group {
+            margin-bottom: 16px;
+        }
+
+        label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 6px;
+            font-size: 14px;
+        }
+
+        select, input[type="text"] {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            box-sizing: border-box;
+            font-size: 16px;
+            background-color: #fafafa;
+            color: #000000;
+        }
+
+        select:focus, input[type="text"]:focus {
+            outline: none;
+            border-color: var(--tg-theme-button-color, #2481cc);
+        }
+
+        .grid-buttons {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 8px;
+            margin-top: 6px;
+        }
+
+        .grid-buttons.errors {
+            grid-template-columns: repeat(3, 1fr);
+        }
+
+        .btn-select {
+            padding: 10px;
+            background-color: #f0f0f0;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            text-align: center;
+            cursor: pointer;
+            font-size: 13px;
+            font-weight: 500;
+            transition: all 0.2s ease;
+            color: #333;
+        }
+
+        .btn-select.active {
+            background-color: var(--tg-theme-button-color, #2481cc);
+            color: var(--tg-theme-button-text-color, #ffffff);
+            border-color: var(--tg-theme-button-color, #2481cc);
+        }
+
+        .footer-btn {
+            margin-top: 24px;
+            width: 100%;
+            padding: 14px;
+            background-color: var(--tg-theme-button-color, #2481cc);
+            color: var(--tg-theme-button-text-color, #ffffff);
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .footer-btn:active {
+            transform: scale(0.98);
+        }
+    </style>
+</head>
+<body>
+
+    <h3>🛴 Samokat Nazorat Formasi</h3>
+    
+    <!-- Samokat Raqami -->
+    <div class="form-group">
+        <label for="samokat_num">Samokat raqamini kiriting:</label>
+        <input type="text" id="samokat_num" placeholder="Masalan: 1024" inputmode="numeric">
+    </div>
+
+    <!-- Qism Nomi -->
+    <div class="form-group">
+        <label>Qism nomini tanlang:</label>
+        <div class="grid-buttons" id="parts_container"></div>
+    </div>
+
+    <!-- Xatolik Kodi -->
+    <div class="form-group">
+        <label>Xatolik kodini tanlang:</label>
+        <div class="grid-buttons errors" id="errors_container"></div>
+    </div>
+
+    <!-- Mexanik Izohi -->
+    <div class="form-group">
+        <label>Mexanik izohini tanlang:</label>
+        <div class="grid-buttons" id="comments_container"></div>
+    </div>
+
+    <button class="footer-btn" onclick="submitForm()">💾 Saqlash va Yuborish</button>
+
+    <script>
+        const tg = window.Telegram.WebApp;
+        tg.expand();
+
+        const PARTS = ["Dashbord", "Kontroller", "IoT", "Motor kaleso", "Tormoz", "Gaz pedal", "Batareyka", "Asosiy sim"];
+        const ERRORS = ["10", "11", "12", "13", "14", "15", "16", "18", "19", "21", "22", "23", "24", "26", "27", "31", "32", "35", "37", "39", "40", "41", "50", "51", "52", "54", "55", "57", "58", "Geo", "Harbit", "Xatolik yo'q"];
+        const COMMENTS = ["Yonmayapti", "O'chib qolgan", "Ishlamayapti", "Singan", "Boshqa"];
+
+        let selectedPart = "";
+        let selectedError = "";
+        let selectedComment = "";
+
+        // Render functions
+        function initGrid(containerId, items, selectionVarSetter, isError=false) {
+            const container = document.getElementById(containerId);
+            items.forEach(item => {
+                const btn = document.createElement('div');
+                btn.className = 'btn-select';
+                btn.innerText = isError && !isNaN(item) ? item + " xatolik" : item;
+                btn.onclick = function() {
+                    // Remove active from siblings
+                    container.querySelectorAll('.btn-select').forEach(b => b.classList.remove('active'));
+                    btn.classList.add('active');
+                    if(containerId === 'parts_container') selectedPart = item;
+                    if(containerId === 'errors_container') selectedError = isError && !isNaN(item) ? item + " xatolik" : item;
+                    if(containerId === 'comments_container') selectedComment = item;
+                };
+                container.appendChild(btn);
+            });
+        }
+
+        // Initialize grids
+        initGrid('parts_container', PARTS);
+        initGrid('errors_container', ERRORS, null, true);
+        initGrid('comments_container', COMMENTS);
+
+        function submitForm() {
+            const samokatNum = document.getElementById('samokat_num').value.trim();
+
+            if (!samokatNum) {
+                alert("Iltimos, samokat raqamini kiriting!");
+                return;
+            }
+            if (!selectedPart) {
+                alert("Iltimos, qism nomini tanlang!");
+                return;
+            }
+            if (!selectedError) {
+                alert("Iltimos, xatolik kodini tanlang!");
+                return;
+            }
+            if (!selectedComment) {
+                alert("Iltimos, mexanik izohini tanlang!");
+                return;
+            }
+
+            const resultData = {
+                samokat_num: samokatNum,
+                qism: selectedPart,
+                xatolik: selectedError,
+                izoh: selectedComment
+            };
+
+            // Send data back to the bot
+            tg.sendData(JSON.stringify(resultData));
+            tg.close();
+        }
+    </script>
+</body>
+</html>
