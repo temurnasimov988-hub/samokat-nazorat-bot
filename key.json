@@ -1,0 +1,13 @@
+{
+  "type": "service_account",
+  "project_id": "nazorat-samokat",
+  "private_key_id": "f916ba263b7272ea82855f5c4817c95272f548db",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvAIBADANBgkqhkiG9w0BAQEFAASCBKYwggSiAgEAAoIBAQC+P51uBBdmvkWO\n6WedHmjQhyFezYIa6WIHmdzSVTde246o7vMxaP525wwnlx2Jp6/hFLqjQWudSB0i\nLlo6gUNknrbNmIpqYsJQPTU0yFS7htspGfeOHvXQMHYE5BAqPgxdN9soTr2d+YbD\n2MR6/f+8qGv7lTOMtBwdeq9eIG+Xx41ttEb5flhfErQbD2bWi0J2mZmYRTcsCz9K\nR9YwNdTpDi5g3BE+T5zn8VJABZ7DFl2kopX32Cp4lvLbPDNHnOxa3MWgyfR7rLnv\n3RQXfcFmMbUGRFeRlKsHP/h4dUPb8G9YhTjp7G8COXR/LS7/p9FPmXQq6QcHJa+z\ne8Xo0FGzAgMBAAECggEAQU9RWg0pg2naMx9JJJTl4oAhIoxmF5r6viVBuyrp4TR6\nGuA8uD+U63iRoZ2s1C6uoBQfph+1M78n0S4cZ20sl4QsuROeoLraffUlKMOE4wN+\nhPOXGkDind+lBDTOn9HBKNcd8w5k5bBdZSoq+RXtDvS6bRlhIvJJnI0bWrLD3FRa\n9p1h0fGzrHsxG0RBvocePZN+684e1FyoxnpMH372S28Rm32pXxfMIkPYuT9Ac3h1\ngr2E+O+DrCCCGA3wrwGmZTUD7zu4SNT/jmHIW5nJveZOgSRHJCEfCQVSesY3VlPj\nGjq3jw1mGDH/YJOPcrIe+Ss4siG7WggzMq6L2wZDsQKBgQDtq7uqeCEmzCyMtxBr\nHlNhGkqKxha1AglSn0PBQWPCfYmuqAew8cWlsvxZNWWRZJ32ew0AjZlsq0krbtE3\n0ajbsxvAMHVRyaDn0s/ks2mGCBG1IBvxyIc1dQ5B937RhvEX/ENbAOZkbYJ9Crjv\n6sQpvYLS2haMhreTCb7aed9vBQKBgQDM66Lmv4sN9MUAMmRJ3DYBZTXEwMh0zMaJ\nekHLIeYlglPx9Wsod09UAvVwgZ/28dC2xw4WmsgNwOBKLqF0nIA8XONlG9vAtNqA\nK6WJ56ORDbL8eAw4cpfy2ZSlUhjPLT+u8/Yb+Qi2s3tekB3bveoqwOAyD69kaCFQ\nW7SEGJjrVwKBgD+b6sohBJ5hnrq6dAZ3Q1GFu9WQVptzRBN81KFwYsa22paIGibd\nTkyerrMhe2GCUFSbcktnmlxfK2IYcp5B2rOSKCcz0PJmyE3DOii3a9KXbkXPpir7\nxFQmU/6LwsFJIFWPCmfcwcy3Emls6Tos1vtk4RKVk9tgYtlTjmTioU4RAoGASjrh\nW6zu9jNAWX3njknS1laPT6J1+rljAdHjm23ALL41ImTAWHw/pDMeLY8HHzEhZdRd\nahrPdQv1M2oI2nEGktcjGDErPXdF3z/wSzA5tAW+XG4wHxKDsFjY27oNep7tfrao\n5CEl4ujJO8wAxOTaunn7vKap5jlCOBXAIkm2uykCgYAENuP0IkI2w6LiRMuQCDx5\nPceSn1ZupSQxWtd3CRPmhbUr9Fg9BdYChKOnFAnIzBBcKnTNC1pZGRUYHn4nK9xH\n/OnscgSlfjpxQ/ED3gCLrb2J3pl2acRcl4Yy+VkMKcEKrKr7z6jGQdrhaFeOcDV2\nkDg2gQmvfgDSI2GDZsq4Vg==\n-----END PRIVATE KEY-----\n",
+  "client_email": "nazorattt-bot@nazorat-samokat.iam.gserviceaccount.com",
+  "client_id": "116157039475642702926",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/nazorattt-bot%40nazorat-samokat.iam.gserviceaccount.com",
+  "universe_domain": "googleapis.com"
+}
